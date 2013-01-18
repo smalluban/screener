@@ -1,0 +1,90 @@
+// CSS3 Helper library
+@import 'nib'
+
+@keyframes rotate
+  from 
+    transform rotateY(0deg)
+  25%
+    transform rotateY(30deg)
+  75%
+    transform rotateY(-30deg)
+  to
+    transform rotateY(0deg)
+
+@keyframes comein
+  from
+    opacity 0
+    transform-origin 1400px 50%
+    transform rotateY(-180deg)
+  to
+    opacity 1
+    transform-origin 50% 50%
+    transform rotateY(0deg)
+
+@keyframes comeout
+  from
+    opacity 1
+    transform rotateY(0deg)
+  to
+    opacity 0
+    transform-origin -1400px 50%
+    transform rotateY(180deg)
+
+// Global CSS rules here
+html, body
+  background black
+  color white
+  width 100%
+  height 100%
+  font-size 150px 
+  text-transform uppercase
+  font-family 'Dosis', sans-serif
+  cursor none
+
+iframe
+  width 100%
+  height 100%
+  border none
+  z-index 1
+
+#box
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  perspective 3000px
+  display box
+  display -webkit-box
+  box-orient horizontal
+  box-pack center
+  box-align center
+  transition 1s background
+  overflow hidden
+  visibility hidden
+  &[data-color]
+    visibility visible
+  &[data-color="0"]
+    background url('../back.png') no-repeat top left #209c32
+  &[data-color="1"]
+    background url('../back.png') no-repeat top left #2b80bb
+  &[data-color="2"]
+    background url('../back.png') no-repeat top left #ac2a4f
+  &[data-color="3"]
+    background url('../back.png') no-repeat top left #ad7029
+
+.message
+  display block
+  text-align center
+  max-width 70%
+  min-width 50%
+  transform-style preserve-3d
+  text-shadow 0px 0px 1px white
+  animation comeout 1s backwards
+  opacity 0
+  &[data-state="in"]
+    opacity 1
+    transform rotateY(0deg)
+    animation comein 1s backwards, rotate 2s 1s infinite //, comeout 1s 33s forwards
+    
+

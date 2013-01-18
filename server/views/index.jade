@@ -1,0 +1,12 @@
+extends layout
+block content
+  h1 Screener Panel
+  h2 Ostatnie wpisy
+  ul.recent
+    each item in recent
+      li #{item.text}, #{item.date}
+  form(method="post",action="/send")
+    p
+      input(type="text", name="message[text]", placeholder="Wpisz text", required, autofocus)
+    p
+      input(type="submit", value="wyślij")
