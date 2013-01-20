@@ -4,9 +4,22 @@ block content
   h2 Ostatnie wpisy
   ul.recent
     each item in recent
-      li #{item.text}, #{item.date}
+      li 
+        | #{item.text}, 
+        != moment(item.date).format("<b> h:mm:ss </b> DD-MM-YY")
+  hr
   form(method="post",action="/send")
     p
       input(type="text", name="message[text]", placeholder="Wpisz text", required, autofocus)
     p
+      | Czas wyświetlania
+      select(name="message[time]", required)
+        option(value="1") 1 minuta
+        option(value="2", selected) 2 minuty
+        option(value="5") 5 minut
+        option(value="10") 10 minut
+        option(value="-1") Ręcznie czyszczony
       input(type="submit", value="wyślij")
+  hr
+  p
+    a(href="/clear") Wyczyść komunikat

@@ -9,37 +9,46 @@ class App extends Spine.Controller
 
   offer: null
   color: 0
+  server: "http://192.168.1.4:3000"
 
   constructor: ->
     super
-    @log "Hello there! I am your Spine App"
 
-    name = prompt("URL","")
+    #Setup part
+    @message.css('fontSize', ($(window).height() / 4) + "px")
+    @iframe.attr "src", "http://" + (window.location.search.replace(/^\?/,'') or prompt("URL",""))
 
-    @iframe.attr "src", name
+    # Socket 
+    @socket = io.connect @server 
 
-    @socket = io.connect 'http://10.1.2.14:3000' 
+    # Clear message screen
+    @socket.on 'clear', ()=>
+      clearTimeout @offer
 
+      @box.removeAttr "data-color"
+      @message.removeAttr "data-state"
+
+    # put new message on screen
     @socket.on 'news',(data)=>
       clearTimeout @offer
+      time = parseInt data.time
 
       @message.removeAttr "data-state"
       @box.removeAttr "data-color"
 
       setTimeout(
         ()=>
-          @box.attr "data-color", @color
+          @box.attr "data-color", data.color
           @message.text data.text
           @message.attr "data-state", "in"
-          @color = (@color + 1) % 4
         , 1500)
 
-
-      @offer = setTimeout(
-        ()=>
-          @box.removeAttr "data-color"
-          @message.removeAttr "data-state"
-        , 90 * 1000)
+      if time > 0
+        @offer = setTimeout(
+          ()=>
+            @box.removeAttr "data-color"
+            @message.removeAttr "data-state"
+          , data.time * 60 * 1000)
 
 # Start application after document is ready 
 # and connect it with body tag

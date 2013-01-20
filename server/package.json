@@ -14,6 +14,7 @@
     , "socket.io": "*"
     , "i18next": "*"
     , "imap": "*"
+    , "moment": "*"
   }, "scripts": {
     "install": "node node_modules/coffee-script/bin/cake build",
     "start": "node server.js",
