@@ -70,7 +70,7 @@ app.post('/send', auth, function(req, resp) {
   if (message.mail === "true") {
     email.send({
       text: message.text,
-      from: "Małgorzata Gabińska <Malgorzata.Gabinska@connectmedica.com>",
+      from: "Screener <helpdesk@connectmedica.com>",
       to: "kanapki@connectmedica.com",
       subject: message.text
     }, function(err, message) {
