@@ -9,14 +9,22 @@ class App extends Spine.Controller
 
   offer: null
   color: 0
-  server: "http://192.168.1.4:3000"
+  server: "http://localhost:3000"
 
   constructor: ->
     super
 
     #Setup part
     @message.css('fontSize', ($(window).height() / 4) + "px")
-    @iframe.attr "src", "http://" + (window.location.search.replace(/^\?/,'') or prompt("URL",""))
+
+    href = window.location.search.replace(/^\?/,'')
+
+    if href == ""
+      url = prompt("URL","")
+      window.location.href = "/?" + url
+
+
+    @iframe.attr "src", "http://" +  href 
 
     # Socket 
     @socket = io.connect @server 
