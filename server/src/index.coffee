@@ -59,11 +59,11 @@ app.post '/send', auth, (req, resp) ->
 
   io.sockets.emit "news", { text: message.text, time: message.time, color: color } 
 
-  if message.mail
+  if message.mail == "true"
     email.send
       text:    message.text
-      from:    "Kanapki <kanapki@connectmedica.com>"
-      to:      "Connectmedica <kanapki@connectmedica.com>"
+      from:    "connectmedica@activeweb.pl"
+      to:      "Connectmedica <dominik.lubanski@connectmedica.com>"
       subject: message.text
       , (err, message) -> 
         console.log err or message
