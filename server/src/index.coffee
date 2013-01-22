@@ -63,7 +63,7 @@ app.post '/send', auth, (req, resp) ->
     email.send
       text:    message.text
       from:    "Kanapki <kanapki@connectmedica.com>"
-      to:      "Connectmedica <dominik.lubanski@connectmedica.com>"
+      to:      "Connectmedica <kanapki@connectmedica.com>"
       subject: message.text
       , (err, message) -> 
         console.log err or message
