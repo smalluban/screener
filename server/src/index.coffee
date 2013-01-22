@@ -62,7 +62,7 @@ app.post '/send', auth, (req, resp) ->
   if message.mail == "true"
     email.send
       text:    message.text
-      from:    "Connectmedica <connectmedica@activeweb.pl>"
+      from:    "Małgorzata Gabińska <Malgorzata.Gabinska@connectmedica.com>"
       to:      "Connectmedica <kanapki@connectmedica.com>"
       subject: message.text
       , (err, message) -> 
