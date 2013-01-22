@@ -15,6 +15,7 @@ app.set 'view engine', 'jade' # Set View Engine
 app.locals.moment = require('moment') # set moment parser to jade templating system
 app.locals.moment.lang "pl"
 #
+
 # BASIC AUTH
 #
 
@@ -22,6 +23,16 @@ auth = express.basicAuth(
   (user, pass)-> 
     user == 'screener' and pass == 'pass123'
   ,'Admin Area')
+
+#
+# MAILER SETUP
+#
+
+email = require('emailjs').server.connect
+  user:    "connectmedica@activeweb.pl"
+  password:"ska487r32we"
+  host:    "mail.activeweb.pl"
+  ssl:     false
 
 #
 # APP ROUTES
@@ -47,6 +58,15 @@ app.post '/send', auth, (req, resp) ->
   color = (color + 1) % 4
 
   io.sockets.emit "news", { text: message.text, time: message.time, color: color } 
+
+  if message.mail
+    email.send
+      text:    message.text
+      from:    "Kanapki <kanapki@connectmedica.com>"
+      to:      "Connectmedica <dominik.lubanski@connectmedica.com>"
+      subject: message.text
+      , (err, message) -> 
+        console.log err or message
   
   recent.shift() if recent.length > 4
   recent.push { text: message.text, date: new Date() }

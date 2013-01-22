@@ -15,6 +15,7 @@
     , "i18next": "*"
     , "imap": "*"
     , "moment": "*"
+    , "emailjs": "*"
   }, "scripts": {
     "install": "node node_modules/coffee-script/bin/cake build",
     "start": "node server.js",

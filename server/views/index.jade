@@ -12,6 +12,9 @@ block content
     p
       input(type="text", name="message[text]", placeholder="Wpisz text", required, autofocus)
     p
+      input(type="checkbox", name="message[mail]", id="mailer")
+      label(for="mailer") Wyślij mail (do kanapki@connectmedica.com)
+    p
       | Czas wyświetlania
       select(name="message[time]", required)
         option(value="1") 1 minuta
