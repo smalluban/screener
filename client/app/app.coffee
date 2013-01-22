@@ -9,7 +9,7 @@ class App extends Spine.Controller
 
   offer: null
   color: 0
-  server: "http://localhost:3000"
+  server: "http://mars.activeweb.pl:8888"
 
   constructor: ->
     super
