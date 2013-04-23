@@ -7,7 +7,7 @@ class App extends Spine.Controller
 
   offer: null
   color: 0
-  server: "http://localhost:7777" #"http://mars.activeweb.pl:8888"
+  server: "http://mars.activeweb.pl:8888"
 
   escapeDiacritics: (text)->
     text.replace(/ą/g, 'a').replace(/Ą/g, 'A')
