@@ -3,6 +3,7 @@ class App extends Spine.Controller
   elements:
     ".message": "message"
     "#box": "box"
+    "#audio": "audio"
     "iframe": "iframe"
 
   offer: null
@@ -20,7 +21,11 @@ class App extends Spine.Controller
       .replace(/ż/g, 'z').replace(/Ż/g, 'Z')
       .replace(/ź/g, 'z').replace(/Ź/g, 'Z')
 
-  constructor: ->
+  playText: (text)-> # $.base64.encode("Uwaga")
+    @audio.attr 'src', "http://www.ivona.com/voicetest.php?rtr=1&t2r=#{$.base64.encode("Uwaga! "+text)}&v2r=cGxfamFjZWs.&lang=pl&add7722213f67b125d7335cb79cb45e339d=b80d300ff26d4447877191cc29aabb96"
+    @audio[0].play()
+
+  constructor: -> 
     super
 
     #Setup part
@@ -36,8 +41,8 @@ class App extends Spine.Controller
     @iframe.attr "src", "http://" +  href 
 
     # Voice function
-    meSpeak.loadConfig "mespeak/mespeak_config.json"
-    meSpeak.loadVoice "mespeak/voices/pl.json"
+    # meSpeak.loadConfig "mespeak/mespeak_config.json"
+    # meSpeak.loadVoice "mespeak/voices/pl.json"
 
     # Socket 
     @socket = io.connect @server 
@@ -58,9 +63,9 @@ class App extends Spine.Controller
       @box.removeAttr "data-color"
 
       setTimeout(
-        ()=>  
+        ()=> 
+          # meSpeak.speak @escapeDiacritics("uwaga! " + data.text), amplitude: 180, wordgap: 3, pitch: 30, speed: 140
           @box.attr "data-color", data.color
-          meSpeak.speak @escapeDiacritics("uwaga! " + data.text), amplitude: 180, wordgap: 3, pitch: 30, speed: 140
           @message.text data.text
           @message.attr "data-state", "in"
         , 1500)
