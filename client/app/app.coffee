@@ -26,6 +26,10 @@ class App extends Spine.Controller
 
     @iframe.attr "src", "http://" +  href 
 
+    # Voice function
+    meSpeak.loadConfig "mespeak/mespeak_config.json"
+    meSpeak.loadVoice "mespeak/voices/pl.json"
+
     # Socket 
     @socket = io.connect @server 
 
@@ -45,8 +49,9 @@ class App extends Spine.Controller
       @box.removeAttr "data-color"
 
       setTimeout(
-        ()=>
+        ()=>  
           @box.attr "data-color", data.color
+          meSpeak.speak data.text, amplitude: 180, wordgap: 7, pitch: 30, speed: 140
           @message.text data.text
           @message.attr "data-state", "in"
         , 1500)
