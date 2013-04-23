@@ -49,8 +49,8 @@ class App extends Spine.Controller
       setTimeout(
         ()=>  
           @box.attr "data-color", data.color
-          console.log data.text
-          meSpeak.speak data.text + " ", amplitude: 180, wordgap: 7, pitch: 30, speed: 140
+          console.log typeof data.text
+          meSpeak.speak String(data.text), amplitude: 180, wordgap: 7, pitch: 30, speed: 140
           @message.text data.text
           @message.attr "data-state", "in"
         , 1500)
