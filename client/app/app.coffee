@@ -1,5 +1,3 @@
-require 'i18n/langs' # for multi language support, comment this line if unused
-
 # Main App controller
 class App extends Spine.Controller
   elements:
