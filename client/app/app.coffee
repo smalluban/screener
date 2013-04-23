@@ -50,7 +50,7 @@ class App extends Spine.Controller
         ()=>  
           @box.attr "data-color", data.color
           console.log data.text
-          meSpeak.speak "Test", amplitude: 180, wordgap: 7, pitch: 30, speed: 140
+          meSpeak.speak data.text + " ", amplitude: 180, wordgap: 7, pitch: 30, speed: 140
           @message.text data.text
           @message.attr "data-state", "in"
         , 1500)
